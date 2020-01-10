@@ -5,6 +5,11 @@ const getAll = (req, res, next) => {
     .then(notes => res.json({ notes }))
 }
 
+const getOne = (req, res, next) => {
+    const id = req.params.id
+}
+
 module.exports = {
-    getAll
+    getAll,
+    getOne
 }

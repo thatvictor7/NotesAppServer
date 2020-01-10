@@ -4,35 +4,47 @@ const getAll = (req, res, next) => {
     return knex('users')
     .orderBy('username', 'asc')
     .then(users => res.json({ users }))
+    .catch(err => console.log('ERROR: ', err))
+}
+
+const getOne = (req, res, next) => {
+    const id = req.params.id
+    return knex('users')
+    .where('user_id', id)
+    .first()
+    .then(users => res.json({ users }))
+    .catch(err => console.log('ERROR: ', err))
 }
 
 const postUser = (req, res, next) => {
     const body = req.body
     return knex('users')
-    // .insert(body)
-    .insert({
-        email: body.email,
-        username: body.username,
-        password: body.password,
-        profile_image: body.profile_image
-    })
+    .insert(body)
     .returning('*')
     .then((user) => {
-        console.log(user) 
-        return user
-        // knex.destroy();
+        return res.json({ user_added: user})
     })
-    .catch((err) => {
-    console.error(err);
-    knex.destroy();
-    process.exit(1);
-  });
-    // .insert({
+    .catch(err => console.log('ERROR: ', err))
+}
 
-    // })
+const putUser = (req, res, next) => {
+    const id = req.params.id
+    const body = req.body
+
+    return knex('users')
+    .where('user_id', id)
+    .update(body)
+    .then((response) => {
+        console.log(response)
+        
+        return res.json({ updated_user: response})
+    })
+    .catch(err => console.log('ERROR: ', err))
 }
 
 module.exports = {
     getAll,
-    postUser
+    getOne,
+    postUser,
+    putUser
 }

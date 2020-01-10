@@ -42,9 +42,21 @@ const putUser = (req, res, next) => {
     .catch(err => console.log('ERROR: ', err))
 }
 
+const deleteUser = (req, res, next) => {
+    const id = req.params.id
+
+    return knex('users')
+    .where('user_id', id)
+    .del()
+    .then((result) => {
+        return res.json({ deleted_user: result})
+    })
+}
+
 module.exports = {
     getAll,
     getOne,
     postUser,
-    putUser
+    putUser,
+    deleteUser
 }

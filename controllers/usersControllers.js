@@ -28,6 +28,7 @@ const postUser = (req, res, next) => {
 }
 
 const putUser = (req, res, next) => {
+
     const id = req.params.id
     const body = req.body
 
@@ -40,6 +41,7 @@ const putUser = (req, res, next) => {
         return res.json({ updated_user: response})
     })
     .catch(err => console.log('ERROR: ', err))
+    
 }
 
 const deleteUser = (req, res, next) => {

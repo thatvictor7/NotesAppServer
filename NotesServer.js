@@ -9,6 +9,7 @@ const cors = require('cors')
 
 const usersRoutes = require('./routes/usersRoutes')
 const notesRoutes = require('./routes/notesRoutes')
+const loginRoutes = require('./routes/loginRoutes')
 
 app.disable('x-powered-by')
 app.use(morgan('short'))
@@ -24,6 +25,7 @@ app.use(cors())
 
 app.use('/users', usersRoutes)
 app.use('/notes', notesRoutes)
+app.use('/login', loginRoutes)
 
 app.use(notFound);
 app.use(errorHandler);

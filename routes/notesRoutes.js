@@ -4,6 +4,7 @@ const controller = require('../controllers/notesControllers')
 
 router.get('/', controller.getAll)
 router.get('/:id', controller.getOne)
+router.get('/user/:id', controller.getAllByUser)
 router.post('/', controller.postNote)
 router.put('/:id', controller.putNote)
 router.delete('/:id', controller.deleteNote)

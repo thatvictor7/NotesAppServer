@@ -32,6 +32,17 @@ const getOne = (req, res, next) => {
 
 }
 
+const getAllByUser = (req, res, next) => {
+    const id = req.params.id
+
+    return knex('notes')
+    .where('user_id', id)
+    .orderBy('created', 'desc')
+    .then((notes) => {
+        return res.json(notes)
+    })
+}
+
 const postNote = (req, res, next) => {
 
     const body = req.body
@@ -92,6 +103,7 @@ const deleteNote = (req, res, next) => {
 module.exports = {
     getAll,
     getOne,
+    getAllByUser,
     postNote,
     putNote,
     deleteNote
